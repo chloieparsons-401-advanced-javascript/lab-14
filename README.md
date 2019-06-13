@@ -1,41 +1,34 @@
 # lab-14
 Access Control
 
-##Author: Chloie Parsons
+##Author: Chloie Parsons (collaboration with Mike & Jeff, some class MOB programming)
 
 ## Links and Resources
 * submission PR: 
-* Travis: https://www.travis-ci.com/chloieparsons-401-advanced-javascript/lab-13
-* Heroku: 
+* Travis: https://www.travis-ci.com/chloieparsons-401-advanced-javascript/lab-14
 
 ## Documentation
-* MongoDB api docs (API servers)
-* jsdoc 
+* MongoDB: mongodb://localhost:27017/access_control
 
 ## Modules
 * app.js
 * auth/middleware.js
 * auth/router.js
+* auth/roles-model.js
 * auth/users-model.js
 * middleware/404.js
 * middleware/error.js
-* routes/books.js
+* auth/routes/newRoutes.js
 
 ## Setup
 ### .env requirements
 PORT - 3000
-MONGODB_URI - URL to the running mongo instance/db
+MONGO_URI - mongodb://localhost:27017/access_control
 
 ## Running the app
-* npm start
+* nodemon
 Endpoint: /signup
-Returns a JSON object with abc in it.
 Endpoint: /signin
-Returns a JSON object with abc in it.
-Endpoint: /books
-Returns a JSON object with abc in it.
-Endpoint: /books/:id
-Returns a JSON object.
 
 ## Tests
 * npm run test
@@ -43,4 +36,4 @@ Returns a JSON object.
 * npm run lint
 
 ##UML
-assets/Authentication_UML.JPG
+assets/access_control.JPG

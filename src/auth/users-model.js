@@ -18,17 +18,20 @@ const users = new mongoose.Schema({
   role: {type: String, default:'user', enum: ['admin','editor','user']},
 });
 
-const capabilities = {
-  admin: ['create','read','update','delete'],
-  editor: ['create', 'read', 'update'],
-  user: ['read'],
-  superuser: ['create','read','update','delete']
-};
-
 users.virtual('roles', {
   ref: 'roles',
   localField: 'role',
-  foreignField: 'capabilities'
+  foreignField: 'type',
+  justOne: true,
+});
+
+users.pre('find', function() {
+  try {
+    this.populate('roles');
+  }
+  catch(e) {
+    console.error('error', e);  
+  }
 });
 
 users.pre('save', function(next) {
