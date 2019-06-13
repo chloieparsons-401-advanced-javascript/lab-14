@@ -4,7 +4,7 @@ Access Control
 ##Author: Chloie Parsons (collaboration with Mike & Jeff, some class MOB programming)
 
 ## Links and Resources
-* submission PR: 
+* submission PR: https://github.com/chloieparsons-401-advanced-javascript/lab-14/pull/1
 * Travis: https://www.travis-ci.com/chloieparsons-401-advanced-javascript/lab-14
 
 ## Documentation
