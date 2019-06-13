@@ -22,7 +22,14 @@ const capabilities = {
   admin: ['create','read','update','delete'],
   editor: ['create', 'read', 'update'],
   user: ['read'],
+  superuser: ['create','read','update','delete']
 };
+
+users.virtual('roles', {
+  ref: 'roles',
+  localField: 'role',
+  foreignField: 'capabilities'
+});
 
 users.pre('save', function(next) {
   bcrypt.hash(this.password, 10)
