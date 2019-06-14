@@ -3,14 +3,6 @@
 const express = require('express');
 const auth = require('../middleware');
 const router = express.Router();
-const Role = require('../roles-model');
-
-router.post('/roles', (req, res, next) => {
- let role = new Role(req.body);
- console.log(req.body);
- role.save();
- res.status(200).send('New roles added to the database');
-});
 
 router.get('/public-stuff', (req, res, next) => {
   res.status(200).send('Anyone can read this');

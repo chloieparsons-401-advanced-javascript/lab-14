@@ -4,8 +4,19 @@ const express = require('express');
 const authRouter = express.Router();
 
 const User = require('./users-model.js');
+const Role = require('./roles-model.js');
 const auth = require('./middleware.js');
 const oauth = require('./oauth/google.js');
+
+authRouter.post('/roles', (req, res, next) => {
+  let role = new Role(req.body);
+  
+  role.save()
+   .then(result => {
+     res.status(200).send(result);
+   })
+   .catch(next);
+ });
 
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);

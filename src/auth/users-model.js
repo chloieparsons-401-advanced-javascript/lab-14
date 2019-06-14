@@ -16,21 +16,22 @@ const users = new mongoose.Schema({
   password: {type:String, required:true},
   email: {type: String},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
+}, { toObject:{virtuals:true}, toJSON:{virtuals:true} //because monogoose says so
 });
 
-users.virtual('roles', {
+users.virtual('acl', {
   ref: 'roles',
   localField: 'role',
-  foreignField: 'type',
+  foreignField: 'role',
   justOne: true,
 });
 
-users.pre('find', function() {
+users.pre('findOne', function() {
   try {
-    this.populate('roles');
+    this.populate('acl');
   }
   catch(e) {
-    console.error('error', e);  
+    throw new Error(e.message);  
   }
 });
 
@@ -92,7 +93,7 @@ users.methods.generateToken = function(type) {
   let token = {
     id: this._id,
     capabilities: capabilities[this.role],
-    type: type || 'user',
+    type: type || 'user', //type of token, use the type generated or default to 'user'
   };
   
   let options = {};
@@ -104,7 +105,7 @@ users.methods.generateToken = function(type) {
 };
 
 users.methods.can = function(capability) {
-  return capabilities[this.role].includes(capability);
+  return this.acl.capabilities.includes(capability);
 };
 
 users.methods.generateKey = function() {
